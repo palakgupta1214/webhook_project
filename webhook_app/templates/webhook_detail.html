@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webhook Detail</title>
+</head>
+<body>
+    <h1>Webhook Detail</h1>
+    <p>Webhook ID: {{ webhook.webhook_id }}</p>
+
+    <form method="POST" action="{%  url 'webhook_detail' webhook.webhook_id %}">
+        {% csrf_token %}
+        <label for="data">Data:</label>
+        <input type="text" name="data" id="data" value="{{ webhook.data }}">
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+<body>
+  <h1>Webhook Detail</h1>
+  <p>Webhook ID: {{ webhook.webhook_id }}</p>
+  <p>Name: {{ webhook.name }}</p>
+  <p>Email: {{ webhook.email }}</p>
+  <form method="POST" action="{% url 'webhook_detail' webhook.webhook_id %}">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" placeholder="Enter your name" value="{{ webhook.name }}">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" placeholder="Enter your email address" value="{{ webhook.email }}">
+    <input type="hidden" name="webhook_id" value="{{ webhook.webhook_id }}">
+    <button type="submit">Save</button>
+  </form>
+</body>
+</html>
+
+
+
+

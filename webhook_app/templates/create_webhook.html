@@ -1,0 +1,47 @@
+
+
+ <html>
+ <body>
+  <button id="createButton">Create Webhook</button>
+  <script>
+    // Send a POST request to create the webhook
+    document.getElementById('createButton').addEventListener('click', async () => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+  
+      const response = await fetch('/webhook/create_webhook/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+  
+        // Check if the response contains the webhook ID, name, and email
+        if (data.webhook_id && data.name && data.email) {
+          const webhookId = data.webhook_id;
+          const webhookName = data.name;
+          const webhookEmail = data.email;
+  
+          // Display the webhook data on the frontend
+          document.getElementById('webhookId').textContent = `Webhook ID: ${webhookId}`;
+          document.getElementById('webhookName').textContent = `Name: ${webhookName}`;
+          document.getElementById('webhookEmail').textContent = `Email: ${webhookEmail}`;
+        } else {
+          console.error('Invalid response received.');
+        }
+      } else {
+        console.error('Error:', response.status);
+      }
+    });
+  </script>
+  
+  
+  
+  
+</body>
+</html> 
+
